@@ -53,3 +53,5 @@ npm start
 ```bash
 http://localhost:3000/api-docs
 ```
+
+![System Design](/docs/screenshots/menujasc.png)
