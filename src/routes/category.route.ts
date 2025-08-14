@@ -2,6 +2,7 @@ import { Router } from "express";
 import { categoryController } from "../controllers/category.controller";
 import { validate } from "../middlewares/validate.middleware";
 import { categorySchema } from "../validators/category.validator";
+import { authMiddleware } from "../middlewares/auth.middleware";
 
 const categoryRouter = Router();
 
@@ -118,10 +119,10 @@ const categoryRouter = Router();
  *         description: Category deleted successfully
  */
 
-categoryRouter.get("/", categoryController.getAll.bind(categoryController));
-categoryRouter.post("/", validate(categorySchema), categoryController.create.bind(categoryController));
-categoryRouter.get("/:id", categoryController.getById.bind(categoryController));
-categoryRouter.put("/:id", validate(categorySchema), categoryController.update.bind(categoryController));
-categoryRouter.delete("/:id", categoryController.delete.bind(categoryController));
+categoryRouter.get("/", authMiddleware ,categoryController.getAll.bind(categoryController));
+categoryRouter.post("/", authMiddleware, validate(categorySchema), categoryController.create.bind(categoryController));
+categoryRouter.get("/:id", authMiddleware, categoryController.getById.bind(categoryController));
+categoryRouter.put("/:id", authMiddleware, validate(categorySchema), categoryController.update.bind(categoryController));
+categoryRouter.delete("/:id", authMiddleware, categoryController.delete.bind(categoryController));
 
 export default categoryRouter;
