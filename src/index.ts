@@ -8,6 +8,7 @@ import swaggerSpec from './utils/swagger';
 import adminRouter from "./routes/admin.route";
 import categoryRouter from "./routes/category.route";
 import foodRouter from "./routes/food.route";
+import orderRouter from "./routes/order.route";
 
 const app = express();
 const httpServer = createServer(app);
@@ -17,6 +18,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use("/api/admins", adminRouter)
 app.use("/api/categories", categoryRouter)
 app.use("/api/foods", foodRouter)
+app.use("/api/orders", orderRouter)
 
 connectDB().catch((err) => {
   console.error("Failed to connect to database:", err);

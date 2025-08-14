@@ -129,6 +129,98 @@ const options: swaggerJSDoc.Options = {
           },
         },
 
+        Order: {
+          type: "object",
+          properties: {
+            _id: { type: "string", example: "66c70000f2c27b6b8e2fbbbb" },
+            orderId: { type: "string", example: "ORD-1001" },
+            payment_type: { type: "string", example: "cash" },
+            amount: { type: "number", example: 5000 },
+            table: { type: "string", example: "Table 5" },
+            payment_status: {
+              type: "string",
+              enum: ["paid", "not paid"],
+              example: "not paid",
+            },
+            order_status: {
+              type: "string",
+              enum: ["pending", "completed", "cancel"],
+              example: "pending",
+            },
+            customerName: { type: "string", example: "Jane Doe" },
+            customerEmail: { type: "string", example: "jane@example.com" },
+            admin: { type: "string", example: "66c50000f2c27b6b8e2f9999" },
+            createdAt: {
+              type: "string",
+              format: "date-time",
+              example: "2024-01-01T00:00:00.000Z",
+            },
+            updatedAt: {
+              type: "string",
+              format: "date-time",
+              example: "2024-01-02T00:00:00.000Z",
+            },
+          },
+        },
+        OrderInput: {
+          type: "object",
+          required: ["orderId", "payment_type", "amount"],
+          properties: {
+            orderId: { type: "string", example: "ORD-1001" },
+            payment_type: { type: "string", example: "cash" },
+            amount: { type: "number", example: 5000 },
+            table: { type: "string", example: "Table 5" },
+            payment_status: {
+              type: "string",
+              enum: ["paid", "not paid"],
+              example: "not paid",
+            },
+            order_status: {
+              type: "string",
+              enum: ["pending", "completed", "cancel"],
+              example: "pending",
+            },
+            customerName: { type: "string", example: "Jane Doe" },
+            customerEmail: { type: "string", example: "jane@example.com" },
+            admin: { type: "string", example: "66c50000f2c27b6b8e2f9999" },
+          },
+        },
+
+        // =====================
+        // OrderDetails Schema
+        // =====================
+        OrderDetails: {
+          type: "object",
+          properties: {
+            _id: { type: "string", example: "66c71111f2c27b6b8e2fcccc" },
+            order: { type: "string", example: "66c70000f2c27b6b8e2fbbbb" },
+            food: { type: "string", example: "66c45b24f2c27b6b8e2f1234" },
+            quantity: { type: "number", example: 2 },
+            price: { type: "number", example: 2500 },
+            total: { type: "number", example: 5000 },
+            createdAt: {
+              type: "string",
+              format: "date-time",
+              example: "2024-01-01T00:00:00.000Z",
+            },
+            updatedAt: {
+              type: "string",
+              format: "date-time",
+              example: "2024-01-02T00:00:00.000Z",
+            },
+          },
+        },
+        OrderDetailsInput: {
+          type: "object",
+          required: ["order", "food", "quantity", "price"],
+          properties: {
+            order: { type: "string", example: "66c70000f2c27b6b8e2fbbbb" },
+            food: { type: "string", example: "66c45b24f2c27b6b8e2f1234" },
+            quantity: { type: "number", example: 2 },
+            price: { type: "number", example: 2500 },
+          },
+        },
+
         // Restaurant Table Schema
         RestaurantTable: {
           type: "object",
