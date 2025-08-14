@@ -3,11 +3,14 @@ import { config } from "./config";
 import { createServer } from "http";
 import { initSocket } from "./utils/socket";
 import { connectDB } from "./utils/db";
+import swaggerUi from 'swagger-ui-express';
+import swaggerSpec from './utils/swagger';
 
 const app = express();
 const httpServer = createServer(app);
 
 app.use(express.json());
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 connectDB().catch((err) => {
   console.error("Failed to connect to database:", err);
