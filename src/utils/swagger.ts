@@ -325,16 +325,12 @@ const options: swaggerJSDoc.Options = {
             },
           },
         },
+
         QrCodeScanInput: {
           type: "object",
           required: ["tableId"],
           properties: {
             tableId: { type: "string", example: "66c45d77f2c27b6b8e2f5678" },
-            scannedByIP: { type: "string", example: "192.168.1.15" },
-            userAgent: {
-              type: "string",
-              example: "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
-            },
           },
         },
       },

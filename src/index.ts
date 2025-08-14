@@ -10,6 +10,7 @@ import categoryRouter from "./routes/category.route";
 import foodRouter from "./routes/food.route";
 import orderRouter from "./routes/order.route";
 import paymentRouter from "./routes/payment.route";
+import qrRouter from "./routes/qrcodescan.route";
 
 const app = express();
 const httpServer = createServer(app);
@@ -21,6 +22,7 @@ app.use("/api/categories", categoryRouter)
 app.use("/api/foods", foodRouter)
 app.use("/api/orders", orderRouter)
 app.use("/api/payments", paymentRouter)
+app.use("/api/qrcodescans", qrRouter)
 
 connectDB().catch((err) => {
   console.error("Failed to connect to database:", err);
