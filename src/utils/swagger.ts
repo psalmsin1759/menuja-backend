@@ -1,4 +1,5 @@
 import swaggerJSDoc from "swagger-jsdoc";
+import { config } from "../config";
 
 const PORT = process.env.PORT || 3000;
 const HOST = process.env.HOST || "http://localhost";
@@ -13,7 +14,7 @@ const options: swaggerJSDoc.Options = {
     },
     servers: [
       {
-        url: `${HOST}/api`,
+        url: `${config.host}:${config.port}/api`,
       },
     ],
     components: {
@@ -26,7 +27,6 @@ const options: swaggerJSDoc.Options = {
             firstName: { type: "string", example: "John" },
             lastName: { type: "string", example: "Doe" },
             email: { type: "string", example: "admin@menuja.com" },
-            phone: { type: "string", example: "+2348012345678" },
             role: { type: "string", enum: ["owner", "admin"], example: "admin" },
             isActive: { type: "boolean", example: true },
             createdAt: {
@@ -49,7 +49,6 @@ const options: swaggerJSDoc.Options = {
             lastName: { type: "string", example: "Doe" },
             email: { type: "string", example: "admin@menuja.com" },
             password: { type: "string", example: "secret123" },
-            phone: { type: "string", example: "+2348012345678" },
             role: { type: "string", enum: ["owner", "admin"], example: "admin" },
           },
         },
