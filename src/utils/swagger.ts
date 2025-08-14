@@ -1,8 +1,6 @@
 import swaggerJSDoc from "swagger-jsdoc";
 import { config } from "../config";
 
-const PORT = process.env.PORT || 3000;
-const HOST = process.env.HOST || "http://localhost";
 
 const options: swaggerJSDoc.Options = {
   definition: {
@@ -27,7 +25,11 @@ const options: swaggerJSDoc.Options = {
             firstName: { type: "string", example: "John" },
             lastName: { type: "string", example: "Doe" },
             email: { type: "string", example: "admin@menuja.com" },
-            role: { type: "string", enum: ["owner", "admin"], example: "admin" },
+            role: {
+              type: "string",
+              enum: ["owner", "admin"],
+              example: "admin",
+            },
             isActive: { type: "boolean", example: true },
             createdAt: {
               type: "string",
@@ -49,7 +51,37 @@ const options: swaggerJSDoc.Options = {
             lastName: { type: "string", example: "Doe" },
             email: { type: "string", example: "admin@menuja.com" },
             password: { type: "string", example: "secret123" },
-            role: { type: "string", enum: ["owner", "admin"], example: "admin" },
+            role: {
+              type: "string",
+              enum: ["owner", "admin"],
+              example: "admin",
+            },
+          },
+        },
+
+        // Inside components.schemas in swaggerSpec
+        Category: {
+          type: "object",
+          properties: {
+            _id: { type: "string", example: "66c60000f2c27b6b8e2faaaa" },
+            name: { type: "string", example: "Main Dish" },
+            createdAt: {
+              type: "string",
+              format: "date-time",
+              example: "2024-01-01T00:00:00.000Z",
+            },
+            updatedAt: {
+              type: "string",
+              format: "date-time",
+              example: "2024-01-02T00:00:00.000Z",
+            },
+          },
+        },
+        CategoryInput: {
+          type: "object",
+          required: ["name"],
+          properties: {
+            name: { type: "string", example: "Main Dish" },
           },
         },
 

@@ -7,6 +7,7 @@ import {
   updateAdminSchema, 
   changePasswordSchema 
 } from "../validators/admin.validator";
+import { authMiddleware } from "../middlewares/auth.middleware";
 
 const adminRouter = Router();
 
@@ -16,6 +17,17 @@ const adminRouter = Router();
  * tags:
  *   name: Admins
  *   description: Admin management
+ */
+
+
+/**
+ * @swagger
+ * components:
+ *   securitySchemes:
+ *     bearerAuth:
+ *       type: http
+ *       scheme: bearer
+ *       bearerFormat: JWT
  */
 
 /**
@@ -126,7 +138,7 @@ adminRouter.get("/", adminController.getAllAdmins.bind(adminController));
  *       404:
  *         description: Admin not found
  */
-adminRouter.put("/:id", validate(updateAdminSchema), adminController.updateAdmin.bind(adminController));
+adminRouter.put("/:id", authMiddleware, validate(updateAdminSchema), adminController.updateAdmin.bind(adminController));
 
 /**
  * @swagger
@@ -134,6 +146,8 @@ adminRouter.put("/:id", validate(updateAdminSchema), adminController.updateAdmin
  *   put:
  *     summary: Change admin password
  *     tags: [Admins]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -165,7 +179,7 @@ adminRouter.put("/:id", validate(updateAdminSchema), adminController.updateAdmin
  *       404:
  *         description: Admin not found
  */
-adminRouter.put("/:id/change-password", validate(changePasswordSchema), adminController.changePassword.bind(adminController));
+adminRouter.put("/:id/change-password", authMiddleware, validate(changePasswordSchema), adminController.changePassword.bind(adminController));
 
 /**
  * @swagger
@@ -173,6 +187,8 @@ adminRouter.put("/:id/change-password", validate(changePasswordSchema), adminCon
  *   delete:
  *     summary: Delete an admin
  *     tags: [Admins]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
