@@ -36,6 +36,8 @@ const adminRouter = Router();
  *   post:
  *     summary: Create a new admin
  *     tags: [Admins]
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -115,6 +117,8 @@ adminRouter.get("/", adminController.getAllAdmins.bind(adminController));
  *   put:
  *     summary: Update an admin
  *     tags: [Admins]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
