@@ -1,7 +1,6 @@
 import swaggerJSDoc from "swagger-jsdoc";
 import { config } from "../config";
 
-
 const options: swaggerJSDoc.Options = {
   definition: {
     openapi: "3.0.0",
@@ -95,13 +94,11 @@ const options: swaggerJSDoc.Options = {
               type: "string",
               example: "Spicy Nigerian Jollof rice with chicken",
             },
+            photo: { type: "string", format: "binary", example: "jollof.jpg" },
             price: { type: "number", example: 2500 },
-            imageUrl: {
-              type: "string",
-              example: "https://example.com/images/jollof.jpg",
-            },
-            category: { type: "string", example: "Main Dish" },
-            isAvailable: { type: "boolean", example: true },
+            available: { type: "boolean", example: true },
+            feature: { type: "boolean", example: false },
+            category: { type: "string", example: "66c45d77f2c27b6b8e2f5678" },
             createdAt: {
               type: "string",
               format: "date-time",
@@ -114,22 +111,21 @@ const options: swaggerJSDoc.Options = {
             },
           },
         },
+
         FoodInput: {
           type: "object",
-          required: ["name", "price"],
+          required: ["name", "price", "category"],
           properties: {
             name: { type: "string", example: "Jollof Rice" },
             description: {
               type: "string",
               example: "Spicy Nigerian Jollof rice with chicken",
             },
+            photo: { type: "string", format: "binary" },
             price: { type: "number", example: 2500 },
-            imageUrl: {
-              type: "string",
-              example: "https://example.com/images/jollof.jpg",
-            },
-            category: { type: "string", example: "Main Dish" },
-            isAvailable: { type: "boolean", example: true },
+            available: { type: "boolean", example: true },
+            feature: { type: "boolean", example: false },
+            category: { type: "string", example: "66c45d77f2c27b6b8e2f5678" },
           },
         },
 
