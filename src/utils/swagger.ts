@@ -221,6 +221,46 @@ const options: swaggerJSDoc.Options = {
           },
         },
 
+        // Payment Schema
+        Payment: {
+          type: "object",
+          properties: {
+            _id: { type: "string", example: "66c45d77f2c27b6b8e2f9999" },
+            name: { type: "string", example: "Paystack" },
+            pubKey: { type: "string", example: "pk_test_xxxxxxxxxxxxx" },
+            secretKey: { type: "string", example: "sk_test_xxxxxxxxxxxxx" },
+            active: { type: "boolean", example: true },
+            webhook: {
+              type: "string",
+              example: "https://menuja.com/webhook/payment",
+            },
+            createdAt: {
+              type: "string",
+              format: "date-time",
+              example: "2024-01-01T00:00:00.000Z",
+            },
+            updatedAt: {
+              type: "string",
+              format: "date-time",
+              example: "2024-01-02T00:00:00.000Z",
+            },
+          },
+        },
+        PaymentInput: {
+          type: "object",
+          required: ["name", "pubKey", "secretKey"],
+          properties: {
+            name: { type: "string", example: "Paystack" },
+            pubKey: { type: "string", example: "pk_test_xxxxxxxxxxxxx" },
+            secretKey: { type: "string", example: "sk_test_xxxxxxxxxxxxx" },
+            active: { type: "boolean", example: true },
+            webhook: {
+              type: "string",
+              example: "https://menuja.com/webhook/payment",
+            },
+          },
+        },
+
         // Restaurant Table Schema
         RestaurantTable: {
           type: "object",
