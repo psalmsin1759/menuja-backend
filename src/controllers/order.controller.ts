@@ -105,6 +105,43 @@ export class OrderController {
       res.status(400).json({ message: error.message });
     }
   }
+
+  async getOrderCount(req: Request, res: Response) {
+    try {
+      const orders = await orderService.getOrderCount();
+      res.status(200).json(orders);
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
+    }
+  }
+  
+
+  async getTotalRevenue(req: Request, res: Response) {
+    try {
+      const orders = await orderService.getTotalRevenue();
+      res.status(200).json(orders);
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
+    }
+  }
+
+  async getMostSoldFoods(req: Request, res: Response) {
+    try {
+      const orders = await orderService.getMostSoldFoods();
+      res.status(200).json(orders);
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
+    }
+  }
+
+  async getMonthlyRevenue(req: Request, res: Response) {
+    try {
+      const orders = await orderService.getMonthlyRevenue();
+      res.status(200).json(orders);
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
+    }
+  }
 }
 
 export const orderController = new OrderController();

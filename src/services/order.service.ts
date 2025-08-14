@@ -118,6 +118,97 @@ export class OrderService {
     }
     return OrderDetails.find({ order: orderId }).populate("food", "name price");
   }
+
+
+  async getOrderCount(): Promise<number> {
+    return Order.countDocuments();
+  }
+
+
+  async getTotalRevenue(): Promise<number> {
+    const result = await Order.aggregate([
+      { $group: { _id: null, totalRevenue: { $sum: "$amount" } } },
+    ]);
+    return result[0]?.totalRevenue || 0;
+  }
+
+
+  async getMostSoldFoods(limit = 6): Promise<{ food: string; count: number }[]> {
+    const result = await OrderDetails.aggregate([
+      {
+        $group: {
+          _id: "$food",
+          count: { $sum: "$quantity" },
+        },
+      },
+      { $sort: { count: -1 } },
+      { $limit: limit },
+      {
+        $lookup: {
+          from: "foods",
+          localField: "_id",
+          foreignField: "_id",
+          as: "foodDetails",
+        },
+      },
+      {
+        $unwind: "$foodDetails",
+      },
+      {
+        $project: {
+          _id: 0,
+          food: "$foodDetails.name",
+          count: 1,
+        },
+      },
+    ]);
+
+    return result;
+  }
+
+
+  async getMonthlyRevenue(): Promise<{ month: string; revenue: number }[]> {
+    const result = await Order.aggregate([
+      {
+        $group: {
+          _id: { $month: "$createdAt" },
+          revenue: { $sum: "$amount" },
+        },
+      },
+      { $sort: { "_id": 1 } },
+      {
+        $project: {
+          _id: 0,
+          month: {
+            $concat: [
+              {
+                $arrayElemAt: [
+                  [
+                    "Jan",
+                    "Feb",
+                    "Mar",
+                    "Apr",
+                    "May",
+                    "Jun",
+                    "Jul",
+                    "Aug",
+                    "Sep",
+                    "Oct",
+                    "Nov",
+                    "Dec",
+                  ],
+                  { $subtract: ["$_id", 1] },
+                ],
+              },
+            ],
+          },
+          revenue: 1,
+        },
+      },
+    ]);
+
+    return result;
+  }
 }
 
 export const orderService = new OrderService();

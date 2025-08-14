@@ -153,4 +153,98 @@ orderRouter.delete("/items/:detailId", orderController.deleteOrderItem.bind(orde
  */
 orderRouter.get("/:orderId/details", orderController.getOrderDetails.bind(orderController));
 
+
+
+/**
+ * @swagger
+ * /orders/count:
+ *   get:
+ *     summary: Get total number of orders
+ *     tags: [Orders Analytics]
+ *     responses:
+ *       200:
+ *         description: Total number of orders
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: number
+ *               example: 120
+ *       500:
+ *         description: Server error
+ */
+orderRouter.get("/count", orderController.getOrderCount);
+
+/**
+ * @swagger
+ * /orders/revenue:
+ *   get:
+ *     summary: Get total revenue from all orders
+ *     tags: [Orders Analytics]
+ *     responses:
+ *       200:
+ *         description: Total revenue
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: number
+ *               example: 250000
+ *       500:
+ *         description: Server error
+ */
+orderRouter.get("/revenue", orderController.getTotalRevenue);
+
+/**
+ * @swagger
+ * /orders/most-sold-foods:
+ *   get:
+ *     summary: Get top 6 most sold foods with quantity
+ *     tags: [Orders Analytics]
+ *     responses:
+ *       200:
+ *         description: List of most sold foods
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   food:
+ *                     type: string
+ *                     example: Jollof Rice
+ *                   count:
+ *                     type: number
+ *                     example: 120
+ *       500:
+ *         description: Server error
+ */
+orderRouter.get("/most-sold-foods", orderController.getMostSoldFoods);
+
+/**
+ * @swagger
+ * /orders/monthly-revenue:
+ *   get:
+ *     summary: Get revenue per month for graphing
+ *     tags: [Orders Analytics]
+ *     responses:
+ *       200:
+ *         description: Revenue grouped by month
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   month:
+ *                     type: string
+ *                     example: Jan
+ *                   revenue:
+ *                     type: number
+ *                     example: 50000
+ *       500:
+ *         description: Server error
+ */
+orderRouter.get("/monthly-revenue", orderController.getMonthlyRevenue);
+
 export default orderRouter;
