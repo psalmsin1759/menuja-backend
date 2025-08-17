@@ -15,7 +15,8 @@ export const createOrderSchema = Joi.object({
   orderItems: Joi.array()
     .items(
       Joi.object({
-        foodId: Joi.string().required(),
+        order: Joi.string().optional(),
+        food: Joi.string().required(),
         quantity: Joi.number().min(1).required(),
         price: Joi.number().min(0).required(),
       })

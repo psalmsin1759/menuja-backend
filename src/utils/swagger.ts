@@ -164,26 +164,67 @@ const options: swaggerJSDoc.Options = {
         },
         OrderInput: {
           type: "object",
-          required: ["orderId", "payment_type", "amount"],
           properties: {
-            orderId: { type: "string", example: "ORD-1001" },
-            payment_type: { type: "string", example: "cash" },
-            amount: { type: "number", example: 5000 },
-            table: { type: "string", example: "Table 5" },
-            payment_status: {
-              type: "string",
-              enum: ["paid", "not paid"],
-              example: "not paid",
+            orderData: {
+              type: "object",
+              required: [
+              ],
+              properties: {
+                orderId: { type: "string", example: "ORD-1001" },
+                payment_type: { type: "string", example: "cash" },
+                amount: { type: "number", example: 10500 },
+                table: { type: "string", example: "Table 5" },
+                payment_status: {
+                  type: "string",
+                  enum: ["paid", "not paid"],
+                  example: "not paid",
+                },
+                order_status: {
+                  type: "string",
+                  enum: ["pending", "completed", "cancel"],
+                  example: "pending",
+                },
+                customerName: { type: "string", example: "Jane Doe" },
+                customerEmail: {
+                  type: "string",
+                  format: "email",
+                  example: "jane@example.com",
+                },
+                admin: { type: "string", example: "66c50000f2c27b6b8e2f9999" },
+              },
             },
-            order_status: {
-              type: "string",
-              enum: ["pending", "completed", "cancel"],
-              example: "pending",
+            orderItems: {
+              type: "array",
+              items: {
+                type: "object",
+                required: ["order", "food", "quantity", "price"],
+                properties: {
+                  order: {
+                    type: "string",
+                    example: "66c70000f2c27b6b8e2fbbbb",
+                  },
+                  food: { type: "string", example: "66c45b24f2c27b6b8e2f1234" },
+                  quantity: { type: "integer", example: 2 },
+                  price: { type: "number", example: 2500 },
+                },
+              },
+              example: [
+                {
+                  order: "66c70000f2c27b6b8e2fbbbb",
+                  food: "66c45b24f2c27b6b8e2f1234",
+                  quantity: 2,
+                  price: 2500,
+                },
+                {
+                  order: "66c70000f2c27b6b8e2fbbbb",
+                  food: "66c45b24f2c27b6b8e2f5678",
+                  quantity: 1,
+                  price: 3000,
+                },
+              ],
             },
-            customerName: { type: "string", example: "Jane Doe" },
-            customerEmail: { type: "string", example: "jane@example.com" },
-            admin: { type: "string", example: "66c50000f2c27b6b8e2f9999" },
           },
+          required: ["orderData", "orderItems"],
         },
 
         // =====================

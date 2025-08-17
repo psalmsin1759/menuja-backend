@@ -157,7 +157,7 @@ orderRouter.get("/:orderId/details", orderController.getOrderDetails.bind(orderC
 
 /**
  * @swagger
- * /orders/count:
+ * /orders/analytics/count:
  *   get:
  *     summary: Get total number of orders
  *     tags: [Orders Analytics]
@@ -172,11 +172,11 @@ orderRouter.get("/:orderId/details", orderController.getOrderDetails.bind(orderC
  *       500:
  *         description: Server error
  */
-orderRouter.get("/count", orderController.getOrderCount);
+orderRouter.get("/analytics/count", orderController.getOrderCount);
 
 /**
  * @swagger
- * /orders/revenue:
+ * /orders/analytics/revenue:
  *   get:
  *     summary: Get total revenue from all orders
  *     tags: [Orders Analytics]
@@ -191,11 +191,11 @@ orderRouter.get("/count", orderController.getOrderCount);
  *       500:
  *         description: Server error
  */
-orderRouter.get("/revenue", orderController.getTotalRevenue);
+orderRouter.get("/analytics/revenue", orderController.getTotalRevenue);
 
 /**
  * @swagger
- * /orders/most-sold-foods:
+ * /orders/analytics/most-sold-foods:
  *   get:
  *     summary: Get top 6 most sold foods with quantity
  *     tags: [Orders Analytics]
@@ -218,11 +218,11 @@ orderRouter.get("/revenue", orderController.getTotalRevenue);
  *       500:
  *         description: Server error
  */
-orderRouter.get("/most-sold-foods", orderController.getMostSoldFoods);
+orderRouter.get("/analytics/most-sold-foods", orderController.getMostSoldFoods);
 
 /**
  * @swagger
- * /orders/monthly-revenue:
+ * /orders/analytics/monthly-revenue:
  *   get:
  *     summary: Get revenue per month for graphing
  *     tags: [Orders Analytics]
@@ -245,6 +245,6 @@ orderRouter.get("/most-sold-foods", orderController.getMostSoldFoods);
  *       500:
  *         description: Server error
  */
-orderRouter.get("/monthly-revenue", orderController.getMonthlyRevenue);
+orderRouter.get("/analytics/monthly-revenue", orderController.getMonthlyRevenue);
 
 export default orderRouter;

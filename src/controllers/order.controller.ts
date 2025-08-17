@@ -108,18 +108,18 @@ export class OrderController {
 
   async getOrderCount(req: Request, res: Response) {
     try {
-      const orders = await orderService.getOrderCount();
-      res.status(200).json(orders);
+      const count = await orderService.getOrderCount();
+      res.status(200).json({count});
     } catch (error: any) {
       res.status(500).json({ message: error.message });
     }
   }
-  
+
 
   async getTotalRevenue(req: Request, res: Response) {
     try {
-      const orders = await orderService.getTotalRevenue();
-      res.status(200).json(orders);
+      const revenue = await orderService.getTotalRevenue();
+      res.status(200).json({revenue});
     } catch (error: any) {
       res.status(500).json({ message: error.message });
     }

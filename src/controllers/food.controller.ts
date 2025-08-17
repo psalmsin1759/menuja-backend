@@ -4,7 +4,7 @@ import { foodService } from "../services/food.service";
 export class FoodController {
   async create(req: Request, res: Response) {
     try {
-      const food = await foodService.createFood(req.body);
+      const food = await foodService.createFood(req.body, req.file);
       res.status(201).json(food);
     } catch (error: any) {
       res.status(400).json({ message: error.message });
@@ -30,9 +30,25 @@ export class FoodController {
     }
   }
 
+  getFoodsByCategory = async (req: Request, res: Response) => {
+    try {
+      const { categoryId } = req.params;
+
+      const foods = await foodService.getFoodsByCategory(categoryId!);
+
+      res.json(foods);
+    } catch (error) {
+      res.status(400).json({ message: (error as Error).message });
+    }
+  };
+
   async update(req: Request, res: Response) {
     try {
-      const food = await foodService.updateFood(req.params.id!, req.body);
+      const food = await foodService.updateFood(
+        req.params.id!,
+        req.body,
+        req.file
+      );
       if (!food) return res.status(404).json({ message: "Food not found" });
       res.json(food);
     } catch (error: any) {

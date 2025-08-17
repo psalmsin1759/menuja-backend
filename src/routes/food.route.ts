@@ -102,6 +102,38 @@ foodRouter.get("/:id", authMiddleware, foodController.getById);
 
 /**
  * @swagger
+ * /foods/category/{categoryId}:
+ *   get:
+ *     summary: Get foods by category
+ *     tags: [Foods]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: categoryId
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The category ID
+ *     responses:
+ *       200:
+ *         description: List of foods in the specified category
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Food'
+ *       400:
+ *         description: Invalid category ID
+ *       404:
+ *         description: No foods found for this category
+ */
+foodRouter.get("/category/:categoryId", authMiddleware, foodController.getFoodsByCategory);
+
+
+/**
+ * @swagger
  * /foods/{id}:
  *   put:
  *     summary: Update a food item

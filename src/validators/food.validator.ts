@@ -8,6 +8,7 @@ const foodSchema = Joi.object({
   available: Joi.boolean().default(true),
   feature: Joi.boolean().default(false),
   category: Joi.string().required(), 
+  photo: Joi.string().optional(), 
 });
 
 export function validateFood(req: Request, res: Response, next: NextFunction) {

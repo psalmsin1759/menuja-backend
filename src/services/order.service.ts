@@ -2,6 +2,7 @@ import { Types } from "mongoose";
 import { Order, IOrder } from "../models/order.model";
 import { OrderDetails, IOrderDetails } from "../models/order.detail.model";
 
+
 export class OrderService {
   async createOrder(
     orderData: Omit<IOrder, keyof Document | "createdAt" | "updatedAt">,
@@ -167,12 +168,12 @@ export class OrderService {
   }
 
 
-  async getMonthlyRevenue(): Promise<{ month: string; revenue: number }[]> {
+  async getMonthlyRevenue(): Promise<{ month: string; amount: number }[]> {
     const result = await Order.aggregate([
       {
         $group: {
           _id: { $month: "$createdAt" },
-          revenue: { $sum: "$amount" },
+          amount: { $sum: "$amount" },
         },
       },
       { $sort: { "_id": 1 } },
@@ -202,7 +203,7 @@ export class OrderService {
               },
             ],
           },
-          revenue: 1,
+          amount: 1,
         },
       },
     ]);
