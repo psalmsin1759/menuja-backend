@@ -21,7 +21,7 @@ const httpServer = createServer(app);
 app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 
 app.use(cors({
-  origin: "http://localhost:3001", 
+  origin: ["http://localhost:3001", "https://menujadashboard.vercel.app"], 
   credentials: true
 }));
 
